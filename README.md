@@ -1,14 +1,14 @@
-# Calculation of subbase drainage for the road pavement
-#### Video Demo:  https://youtu.be/OL5igIVnEOs
-#### Description:
-I hold a degree as a certified engineering designer, specializing in the realm of road construction. When embarking on projects for highways, we rely on specific standards and calculation methodologies. The most critical component of a road is its pavement – the one that shoulders all vehicular loads. Accurate calculation of this pavement stands as a paramount task in road design.
+# Расчет толщины подстилающего слоя дорожной одежды
+#### Видео демо (eng):  https://youtu.be/OL5igIVnEOs
+#### Описание:
+При разработке проектов автомобильны дорог мы пользуемся определёнными нормативами и методиками расчета. Самая ответственная конструкция дороги - это дорожная одежда, так как она воспринимает все транспортные нагрузки. Ее корректный расчет - приоритетная задача при проектировании дорог.
 
-Pavement design involves myriad factors influencing its durability and strength. Among these calculations is the drainage assessment for the underlying road base layer. This computation establishes the minimum allowable thickness of the road base layer, preventing structural oversaturation.
+Дорожная одежда рассчитывается на множество показателей влияющих на ее долговечность и прочность. Одним из этих расчетов - расчет на осушение подстилающего слоя дорожной одежды. В ходе расчета определяется минимальная допустимая толщина подстилающего слоя дорожной одежды, чтобы не допустить переувлажения коснтрукции.
 
-Existing software products like Indor and Robur inadequately conduct these calculations. Consequently, I've made the decision to create my own program that meticulously executes this calculation.
+В существующих программных продуктах Indor и Robur расчет производится некорректно. Поэтому я решил  сделать свою программу которая будет корректно выполнять этот расчет.
 
-My program is coded in Python, employing the Flet framework to craft a graphical user interface. I've also utilized a fork of the simpledt library for table representation. Source data, tables, and calculation methodologies are gleaned from the normative document PNST 542-2021.
+Моя программа написана на python с использованием фреймворка Flet для создания графического интерфейса. А также я использовал форк simpledt для представления таблиц. Исходные данные, таблицы и методика расчета взята из нормативного документа ПНСТ 542-2021
 
-During the project's realization, I acquainted myself with the Flet framework. I mastered the art of importing and aptly presenting tables, seamlessly integrating them into the interface. I fashioned a foundational program interface that adapts fluidly to diverse screen resolutions or window sizes. I've also developed a program adept at filtering user inputs.
+В процессе риализации проекта я познакомился с фреймворком Flet. Научился инмортировать и правильно представлять таблицы, а также встраивать их в интерфейс. Разработал базовый интерфейс программы поддерживающий любое разрешение экрана или окна. Подготовил программу которая умеет фильтровать пользовательский ввод.
 
-My program prompts users for a set of initial data. Some of this data is drawn from corresponding tables presented on the page. The source data is entered into appropriately named fields. The program necessitates numerical data in float format for calculation purposes. Additionally, the entered numbers must fall within predefined intervals. If incorrect data is entered and the "Calculate" button is pressed, an error message will display, indicating the necessary corrections.
+Моя программа запрашивает у пользователя набор исходных данных. Часть из них принимается по соответсвующим таблицам, представленых на странице. Исходные данные вводятся в соответсвующие поименованные поля. Программе для расчета необходимы числовые данные в формате float. Также числа должны лежать в определеном интервале. Если введены не корректные данные при нажатии кнопки расчитать будет выведена ошибка с указанием что необходимо ввести.
