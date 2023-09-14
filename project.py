@@ -20,16 +20,16 @@ def y_coef(x: float, i: int) -> float:
 
 def check(o, min, max):
     if not o.value:
-        o.error_text = 'Please input the data'
+        o.error_text = 'Введите значение'
     else:
         try:
             num = float(o.value.replace(',', '.'))
         except ValueError:
-            o.error_text = 'Please enter a float number'
+            o.error_text = 'Ввидите число'
             o.value = ''
             return None
         if num < min or num > max:
-            o.error_text = f'Must be in the range from {min} to {max}'
+            o.error_text = f'Значение должно быть в диапазоне от {min} до {max}'
         else:
             o.error_text = ''
             return num
@@ -59,18 +59,18 @@ def main(page: ft.Page):
         x_coef = q1 / Kf
         h_dop = y_coef(x_coef, i) * l / 3.5
         h_fin = h_dop + soil
-        fin.value = f'The total thickness of the subbase layer is {h_fin:.2f} m considering the allowance for capillary moisture rise {soil} m'
+        fin.value = f'Полная толщина подстилающего слоя равна {h_fin:.2f} м с учетом дополнительного защитного слоя {soil} м'
         page.update()
 
 
     # Input data for calculation
-    txt_Kf = ft.TextField(label='Input the subbase filtration coefficient', width=250)
-    txt_L = ft.TextField(label='Input the the length of the filtration path', width=250)
-    txt_B = ft.TextField(label='Input the width of the roadway', width=250)
+    txt_Kf = ft.TextField(label='Введите коэффициент фильтрации для подстилающего слоя', width=250)
+    txt_L = ft.TextField(label='Введите длину пути фильтрации', width=250)
+    txt_B = ft.TextField(label='Введите ширину покрытия автомобильной дороги', width=250)
 
     txt_i = ft.Dropdown(
-        label='Slope',
-        hint_text='Choose the slope of the subbase layer',
+        label='Уклон',
+        hint_text='Выберите уклон подстилающего слоя',
         options=[
             ft.dropdown.Option(text='20‰', key=0.02),
             ft.dropdown.Option(text='30‰', key=0.03),
@@ -78,30 +78,30 @@ def main(page: ft.Page):
         ], width=250,
     )
     txt_soil = ft.Dropdown(
-        label='Soil',
-        hint_text='Choose the subbase soil type',
+        label='Материал',
+        hint_text='Выберите материал подстилающего слоя',
         options=[
-            ft.dropdown.Option(text='Fine sand', key=0.20),
-            ft.dropdown.Option(text='Medium sand', key=0.15),
-            ft.dropdown.Option(text='Coarse sand', key=0.10),
+            ft.dropdown.Option(text='Мелкий песок', key=0.20),
+            ft.dropdown.Option(text='Средний песок', key=0.15),
+            ft.dropdown.Option(text='Крупный песок', key=0.10),
         ], width=250,
     )
     txt_profile = ft.Dropdown(
-        label='Cross-sectional profile',
-        hint_text='Choose the type of cross-sectional profile',
+        label='Поперечный профиль',
+        hint_text='Выберите тип поперечного профиля',
         options=[
-            ft.dropdown.Option(text='Single-slope cross-sectional profile', key=1),
-            ft.dropdown.Option(text='Dual-slope cross-sectional profile', key=0.5),
+            ft.dropdown.Option(text='Односкатный', key=1),
+            ft.dropdown.Option(text='Двускатный', key=0.5),
         ], width=250,
     )
 
     txt_q = ft.TextField(
-        label='Input volume of the average water inflow (table 13)', width=250
+        label='Введите значение притока воды в подстилающий слой (по таблице 13)', width=250
     )
-    txt_Kpik = ft.TextField(label='Input volume of the peak coefficient (table 14)', width=250)
-    txt_Kg = ft.TextField(label='Input volume of the hydrological reserve coefficient (table 14)', width=250)
-    txt_Kr = ft.TextField(label='Input volume of the reduction water inflow coefficient (table 15)', width=250)
-    txt_Kv = ft.TextField(label='Input volume of the bulking coefficient', width=250)
+    txt_Kpik = ft.TextField(label='Введите значение коэффициента "пик" (по таблице 14)', width=250)
+    txt_Kg = ft.TextField(label='Введите значение коэффициента гидрологического запаса (по таблице 14)', width=250)
+    txt_Kr = ft.TextField(label='Введите значение коэффициента снижение притока воды (по таблице 15)', width=250)
+    txt_Kv = ft.TextField(label='Введите значение коэффициента вогнутости', width=250)
     fin = ft.Text('', size=40, color=ft.colors.GREEN_700)
 
     #Tables
@@ -112,29 +112,29 @@ def main(page: ft.Page):
     excel_15 = ExcelToFlet('Table_15.xlsx', width=900)
 
     item_13 = ft.Column(controls=[
-        ft.Text('Table 13\nThe volume of water entering the roadbed from the soil', width=900),
+        ft.Text('Таблица 13\nОбъем воды, поступающей в основание дорожной одежды из грунта', width=900),
         excel_13
     ])
 
     item_14 = ft.Column(controls=[
-        ft.Text('Table 14\nThe peak coefficient that takes into account the non-steady state of water inflow due to uneven thawing\n and atmospheric precipitation', width=900),
+        ft.Text('Таблица 14\nЗначения коэффициента "пик" Kпик и коэффициента гидрологического запаса Kг', width=900),
         excel_14,
-        ft.Text('''Note:\n
-                1. For non-dusty soils, Kg = 1.0\n
-                2. The numerator contains the values of Kg for roads of categories I and II, and
-                the denominator - for categories III and IV\n''', width=700)
+        ft.Text('''Примечания:\n
+                1. Для непылеватых грунтов, Kг = 1.0\n
+                2. В числителе указаны значения Kг для дорог категорий I и II
+                в знаменателе - для категорий III и IV\n''', width=700)
     ])
 
     item_15 = ft.Column(controls=[
-        ft.Text('Table 15\nCoefficient accounting for water inflow reduction for the working layer soil', width=900),
+        ft.Text('Таблица 15\nЗначения коэффициента Кр, учитывающего снижение притока воды в дренирующий слой', width=900),
         excel_15,
-        ft.Text('''Note:\n
-                1. When using dusty soils, the coefficient Kr = 1.0\n
-                2. If multiple measures are provided, each of them is considered separately\n''', width=900)
+        ft.Text('''Примечания:\n
+                1. При применении пылеватых грунтов коэффициент Kр = 1.0\n
+                2. Если предусмотрено несколько мероприятий, то каждое из них учитывают в отдельности\n''', width=900)
     ])
 
     #Adding interface elements to the page
-    page.add(ft.Text('Initial data for calculation', size=50))
+    page.add(ft.Text('Исходные данные для расчета', size=50))
 
     page.add(
         ft.Row(controls=[
@@ -162,7 +162,7 @@ def main(page: ft.Page):
             txt_Kg,
             txt_Kr,
             txt_Kv,
-            ft.ElevatedButton("Calculate", on_click=button_clicked)
+            ft.ElevatedButton("Расчитать", on_click=button_clicked)
         ], wrap=True)
     )
 
