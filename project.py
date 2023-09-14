@@ -29,7 +29,7 @@ def check(o, min, max):
             o.value = ''
             return None
         if num < min or num > max:
-            o.error_text = f'Значение должно быть в диапазоне от {min} до {max}'
+            o.error_text = f'В диапазоне от {min} до {max}'
         else:
             o.error_text = ''
             return num
@@ -105,32 +105,32 @@ def main(page: ft.Page):
     fin = ft.Text('', size=40, color=ft.colors.GREEN_700)
 
     #Tables
-    excel_13 = ExcelToFlet('Table_13.xlsx', width=900)
+    excel_13 = ExcelToFlet('Table_13.xlsx', width=1000)
 
-    excel_14 = ExcelToFlet('Table_14.xlsx', width=900)
+    excel_14 = ExcelToFlet('Table_14.xlsx', width=800)
 
-    excel_15 = ExcelToFlet('Table_15.xlsx', width=900)
+    excel_15 = ExcelToFlet('Table_15.xlsx', width=1000)
 
     item_13 = ft.Column(controls=[
-        ft.Text('Таблица 13\nОбъем воды, поступающей в основание дорожной одежды из грунта', width=900),
+        ft.Text('Таблица 13\nОбъем воды, поступающей в основание дорожной одежды из грунта', width=1000),
         excel_13
     ])
 
     item_14 = ft.Column(controls=[
-        ft.Text('Таблица 14\nЗначения коэффициента "пик" Kпик и коэффициента гидрологического запаса Kг', width=900),
+        ft.Text('Таблица 14\nЗначения коэффициента "пик" Kпик и коэффициента гидрологического запаса Kг', width=800),
         excel_14,
         ft.Text('''Примечания:\n
                 1. Для непылеватых грунтов, Kг = 1.0\n
                 2. В числителе указаны значения Kг для дорог категорий I и II
-                в знаменателе - для категорий III и IV\n''', width=700)
+                в знаменателе - для категорий III и IV\n''', width=800)
     ])
 
     item_15 = ft.Column(controls=[
-        ft.Text('Таблица 15\nЗначения коэффициента Кр, учитывающего снижение притока воды в дренирующий слой', width=900),
+        ft.Text('Таблица 15\nЗначения коэффициента Кр, учитывающего снижение притока воды в дренирующий слой', width=1000),
         excel_15,
         ft.Text('''Примечания:\n
                 1. При применении пылеватых грунтов коэффициент Kр = 1.0\n
-                2. Если предусмотрено несколько мероприятий, то каждое из них учитывают в отдельности\n''', width=900)
+                2. Если предусмотрено несколько мероприятий, то каждое из них учитывают в отдельности\n''', width=1000)
     ])
 
     #Adding interface elements to the page
